@@ -1,6 +1,6 @@
 const container = document.querySelector(".jobs-listings") //-> capturamos el elemento
 
-fetch("../01-Javascript/data.json") // -> fetch hace una petición
+fetch("./data.json") // -> fetch hace una petición
     .then((response) =>{ // ->y entonces (.then) cuando tengas la respuesta
         return response.json(); // -> me devuelva y me transforme los datos en un archivo json
     })

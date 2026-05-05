@@ -2,7 +2,7 @@ const filter_location = document.querySelector("#filter-Location")//Filtro de lo
 const filter_technology = document.querySelector("#filter-technology")//Filtro technology
 const filter_experience = document.querySelector("#filter-experience-level")//Filtro de experience
 
-
+const getJobCards = () => document.querySelectorAll(".job-listing-card")
 
 //Filtro de location
 
@@ -24,6 +24,7 @@ filter_location.addEventListener("change", () => {
 
 filter_technology.addEventListener("change", () => {
     const valor_tarjeta = filter_technology.value // -> esto nos trae el elemento seleccionado
+    const tarjeta_seleccionada = getJobCards()
 
     tarjeta_seleccionada.forEach(tarjeta => {
         const technology = tarjeta.dataset.technology // -> en cada vuelta guarda el elemento encontrado en cada tarjeta
@@ -37,7 +38,7 @@ filter_technology.addEventListener("change", () => {
 
 filter_experience.addEventListener("change", () => {
     const valor_tarjeta = filter_experience.value
-
+    const tarjeta_seleccionada = getJobCards()
 
 
     tarjeta_seleccionada.forEach(tarjeta => {
