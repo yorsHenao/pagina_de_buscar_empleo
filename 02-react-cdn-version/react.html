@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Encuentra tu proximo trabajo</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Explorar miles de oportunidades para tu proximo trabajo">
+    <link rel="stylesheet" href="./styles.css">
+    
+  
+    <script type="module" src="./main.js"></script>
+
+
+    <!-- React.js sin jsx
+    <script type="module">
+        //react y react-dom para usar react en el proyecto
+        import React from "https://esm.sh/react?dev";
+        import ReactDOM from "https://esm.sh/react-dom/client?dev";
+
+        const titulo = React.createElement(
+            "h1",
+            {style: {color: "#09f"}},
+            "Hola, React"
+        )
+        //rootEL recupera el elemento del DOM con el id root
+        const rootEl = document.querySelector("#root");
+        //creamos una raist de react, e indicomos donde se va a renderizar el contenido de react
+        const root = ReactDOM.createRoot(rootEl)
+        root.render(titulo);
+    </script> -->
+    
+    <script type="module">
+        import React from "https://esm.sh/react?dev";
+        import ReactDOM from "https://esm.sh/react-dom/client?dev";
+
+        //usamos window para hacer que react y react-dom estén disponibles globalmente en el navegador
+        window.React = React;
+        window.ReactDOM = ReactDOM;
+    </script>
+
+     <!--estamos usando Babel para compilar JSX en el navegador-->
+    <script  src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!--un script que va detectar la biblioteca de Babel y va transformar el JSX en JavaScript -->
+    <!--Creando un elemento y un componente de React con JSX
+    <script type="text/babel">
+
+       /*  //esto es un elemento de react
+        const titulo = <h1
+        //las llaves lo que haces es evualar lo que tenga dentro de ellas como JavaScript, en este caso un objeto con la propiedad color y su valor
+        style={{color: "#09f"}}
+        >Hola bienvenido a react.js</h1>; */
+
+        //componente de react
+        //propts en nuestro codigo es un objeto que contiene las propiedades que le pasamos a nuestro componente, en este caso el nombre
+        function Saludo ({nombre, color}){
+            return <h2 style={{color: color}}>Hola, {nombre}</h2>;
+        }
+
+        function App() {
+            return (
+                <div>
+                    <Saludo color="#09f" nombre="Juan" />
+                    <Saludo color="red" nombre="María" />
+                    <Saludo color="blue" nombre="Carlos" />
+                </div>
+
+            )
+
+        }
+
+        //rootEL recupera el elemento del DOM con el id root
+        const rootEl = document.querySelector("#root");
+        //creamos una raist de react, e indicomos donde se va a renderizar el contenido de react
+        const root = ReactDOM.createRoot(rootEl)
+
+        //acá agregamos el elemento o componente que queremos renderizar
+        //para renderizar el componente App, lo que hacemos es escribirlo como si fuera una etiqueta HTML, con la sintaxis de JSX
+        root.render(<App />);
+        
+    </script>-->
+    <script type="text/babel">
+
+        //componente que remplaza el fetch para mostrar una tarjeta de empleo
+        // usamos {} por que es destructuración de objetos, lo que hace es extraer las propiedades del objeto que se le pasa como argumento a la función, en este caso el objeto con las propiedades titulo, empresa, ubicacion y descripcion
+        function JobCard ({data, titulo, empresa, ubicacion, descripcion}){
+           const [isApplied, setIsApplied] = React.useState(false) //iniciamos en false
+
+            //funcion para manejar el click del boton de aplicar, - muestra una alerta
+            function handleClick() {
+                setIsApplied(!isApplied) //cambia el estado de isApplied a su valor contrario, si es false lo cambia a true y viceversa;
+            }
+
+            const text = isApplied ? "Aplicado" : "Aplicar";
+            const buttonClass = isApplied ? "is-applied" : " "
+            
+            return (
+                <article className="job-listing-card"
+                data-modalidad={data.location}
+                data-experience={data.experience}
+                data-technology={data.technology}
+                >
+                    <div>
+                        <h3>{titulo}</h3>
+                        <small>{empresa} - {ubicacion}</small>
+                        <p>{descripcion}</p>
+                    </div>
+                    <button 
+                    className="button-apply-job"
+                    onClick={handleClick}
+                    >
+                    
+                    
+                    {text}
+                    </button>
+                </article>
+            )
+            
+        }
+
+        function App() {
+            return (
+                <div className="jobs-listings">
+                    <JobCard
+                    titulo="Desarrollador Frontend"
+                    empresa="Tech Solutions"
+                    ubicacion="Remoto"
+                    descripcion="Buscamos un desarrollador frontend con experiencia en React.js para unirse a nuestro equipo dinámico."
+                    
+                    //data es un prop -> osea una propiedad que le pasamos al componente JobCard, lo que hacemos es pasarle un objeto con las propiedades modalidad, experience y technology, que son las mismas que usamos en el componente JobCard para asignarlas a los atributos data-modalidad, data-experience y data-technology respectivamente
+                    data={{location: "remoto", experience: "mid", technology: "react"}}
+                    />
+                </div>
+
+            )
+
+        }
+
+        //rootEL recupera el elemento del DOM con el id root
+        const rootEl = document.querySelector("#root");
+        //creamos una raist de react, e indicomos donde se va a renderizar el contenido de react
+        const root = ReactDOM.createRoot(rootEl)
+
+        //acá agregamos el elemento o componente que queremos renderizar
+        //para renderizar el componente App, lo que hacemos es escribirlo como si fuera una etiqueta HTML, con la sintaxis de JSX
+        root.render(<App />);
+        
+    </script>
+
+    
+
+    
+
+</head>
+
+<body>
+    <header>
+        <h1>DevJobs</h1>
+
+
+        <nav>
+            <a href="./empleos.html">Empleos</a>
+        </nav>
+
+        <div>
+
+        </div>
+
+    </header>
+
+    <main>
+        <section class="jobs-search">
+            <h1>React.js, primeros pasos </h1>
+
+            <!--renderizar contenido de react-->
+            <div id="root"></div>
+            
+        </section>
+
+        <section>
+            <h2>Empleos disponibles</h2>
+            <div id="root"></div>
+        </section>
+    </main>
+    <footer style="padding-bottom: 2000px ;">
+        <small>&copy; 2025 DevJobs. Todos los derechos reservados.</small>
+    </footer>
+
+</body>
+
+</html>
