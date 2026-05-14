@@ -1,7 +1,20 @@
-function Pagination () {
+function Pagination ({currentPage = 1, totalPages = 5}) {
+  //generar un array con el numero de paginas a mostrar
+  const pages = Array.from({length: totalPages}, (_, i) => i + 1)
+
+  const isFirstPage = currentPage === 1 // indica si estamos en la primera pagina
+  const isLastPage = currentPage === totalPages // indica si estamos en la ultima pagina
+
+  const styleLPrevButton = isFirstPage ? {pointerEvents: 'none', opacity: 0.5} : {}
+  const styleNextButton = isLastPage ? {pointerEvents: 'none', opacity: 0.5} : {}
+
+
     return (
         <nav className="pagination">
-          <a href="#">
+          {
+            //esto es un rendeizado condicional, si no es la primera pagina se muestra el boton de anterior
+            !isFirstPage && (
+              <a href="#" style={styleLPrevButton}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -18,14 +31,23 @@ function Pagination () {
               <path d="M15 6l-6 6l6 6" />
             </svg>
           </a>
-          <a className="is-active" href="#">
-            1
-          </a>
-          <a href="#">2</a>
-          <a href="#">3</a>
-          <a href="#">4</a>
-          <a href="#">5</a>
-          <a href="#">
+            )
+          }
+          
+          
+          
+          {pages.map(page => (
+            <a
+              href="#"
+              className={currentPage === page ? 'is-active' : ''}
+            >
+              {page}
+            </a>
+          ))}
+
+          {
+            !isLastPage && (
+              <a href="#" style={styleNextButton}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -42,6 +64,9 @@ function Pagination () {
               <path d="M9 6l6 6l-6 6" />
             </svg>
           </a>
+            )
+          }
+          
         </nav>
 
     )
