@@ -1,4 +1,4 @@
-function Pagination ({currentPage = 1, totalPages = 5}) {
+function Pagination ({currentPage = 1, totalPages = 5, onPageChange} ) {
   //generar un array con el numero de paginas a mostrar
   const pages = Array.from({length: totalPages}, (_, i) => i + 1)
 
@@ -9,12 +9,33 @@ function Pagination ({currentPage = 1, totalPages = 5}) {
   const styleNextButton = isLastPage ? {pointerEvents: 'none', opacity: 0.5} : {}
 
 
+  const handlePrevClick = (event) => {
+    event.preventDefault() // evitar que el enlace navegue a otra pagina
+    if (isFirstPage == false) {
+      onPageChange(currentPage - 1) // llamar a la funcion de cambio de pagina con la pagina anterior
+    }
+  }
+
+  const handleNextClick = (event) => {
+    event.preventDefault() // evitar que el enlace navegue a otra pagina
+    if (isLastPage == false) {
+      onPageChange(currentPage + 1) // llamar a la funcion de cambio de pagina con la pagina siguiente
+    }
+  }
+
+  const handlePageChange = (event) => {
+    event.preventDefault() // evitar que el enlace navegue a otra pagina
+    const page = Number(event.target.dataset.page) // obtener la pagina seleccionada del atributo data-page
+    onPageChange(page) // llamar a la funcion de cambio de pagina con la pagina seleccionada
+  } 
+
+
     return (
         <nav className="pagination">
           {
             //esto es un rendeizado condicional, si no es la primera pagina se muestra el boton de anterior
             !isFirstPage && (
-              <a href="#" style={styleLPrevButton}>
+              <a href="#" style={styleLPrevButton} onClick={handlePrevClick}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -38,8 +59,10 @@ function Pagination ({currentPage = 1, totalPages = 5}) {
           
           {pages.map(page => (
             <a
+              data-page={page}
               href="#"
               className={currentPage === page ? 'is-active' : ''}
+              onClick={handlePageChange}
             >
               {page}
             </a>
@@ -47,7 +70,7 @@ function Pagination ({currentPage = 1, totalPages = 5}) {
 
           {
             !isLastPage && (
-              <a href="#" style={styleNextButton}>
+              <a href="#" style={styleNextButton} onClick={handleNextClick}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"

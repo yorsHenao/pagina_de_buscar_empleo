@@ -5,6 +5,9 @@ import JobListings from "./componets/JobListings.jsx"
 import Pagination from "./componets/Pagination.jsx"
 
 function App() {
+  const handlePageChange = (page) => {
+    console.log("cambiando la pagina", page)
+  }
   return (
     <>
       <Header />
@@ -14,7 +17,7 @@ function App() {
 
         <JobListings />
 
-        <Pagination/>
+        <Pagination currentPage={4} totalPages={5}  onPageChange={handlePageChange}/>
       </main>
       <Footer />
     </>
