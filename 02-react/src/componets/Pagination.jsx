@@ -59,6 +59,7 @@ function Pagination ({currentPage = 1, totalPages = 5, onPageChange} ) {
           
           {pages.map(page => (
             <a
+              key={page}// key es un identificador unico
               data-page={page}
               href="#"
               className={currentPage === page ? 'is-active' : ''}
