@@ -398,7 +398,7 @@ article h3 {
   border-bottom: none;
 }
 
-/* =============================================== */
+/* /* =============================================== */
 /* ESTILOS PARA LA PAGINACIÓN                      */
 /* =============================================== */
 
@@ -436,6 +436,12 @@ article h3 {
   pointer-events: none;
 }
 
+.pagination a.is-active {
+  background-color: var(--primary-light);
+  color: #ffffff;
+  pointer-events: none;
+}  
+
 /* Botones (el de aplicar trabajo) */
 
 /*Clase de js -> is-applied*/
@@ -448,6 +454,7 @@ article h3 {
   background: #4caf50;
   pointer-events: none;
 }
+
 
 
 /*Estilos select*/

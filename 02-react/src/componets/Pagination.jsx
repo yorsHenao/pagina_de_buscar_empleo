@@ -1,3 +1,5 @@
+
+
 function Pagination ({currentPage = 1, totalPages = 5, onPageChange} ) {
   //generar un array con el numero de paginas a mostrar
   const pages = Array.from({length: totalPages}, (_, i) => i + 1)
@@ -62,7 +64,7 @@ function Pagination ({currentPage = 1, totalPages = 5, onPageChange} ) {
               key={page}// key es un identificador unico
               data-page={page}
               href="#"
-              className={currentPage === page ? 'is-active' : ''}
+              className={currentPage === page ?  "is-active" : ''}
               onClick={handlePageChange}
             >
               {page}
