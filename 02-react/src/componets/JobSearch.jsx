@@ -1,5 +1,5 @@
 import {useId} from "react"
-function JobSearch() {
+function JobSearch({onTextFilter, onSearch}) {
   const  idText = useId()
   const  ideTtechology = useId()
   const  idLocation = useId()
@@ -9,8 +9,24 @@ function JobSearch() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Submit del formulario de busqueda");
-  };
+    
+    const formData = new FormData(event.target)
+
+    const filters = {
+      technology: formData.get(ideTtechology),
+      location: formData.get(idLocation),
+      experienceLevel: formData.get(idExperienceLevel)
+
+    }
+
+    onSearch(filters)
+  }
+
+  const handleTextChange = (event) => {
+    const text = event.target.value
+    onTextFilter(text)
+  }
+
   return (
     <section className="jobs-search">
       <h1>Encuentra tu próximo trabajo </h1>
@@ -41,6 +57,7 @@ function JobSearch() {
             name={idText}
             type="text"
             placeholder="Buscar empleos por titulo, habilidad o empresa"
+            onChange={handleTextChange}
           />
 
           <button type="submit" style={{position: "absolute", right: "2px"}}>Buscar</button>
