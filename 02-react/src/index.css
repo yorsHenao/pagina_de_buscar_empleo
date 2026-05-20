@@ -328,6 +328,7 @@ article h3 {
 .jobs-search .search-bar {
   background: var(--input-bg);
     padding: .25rem .5rem;
+    position: relative;
 }
 
 /* Icono de búsqueda dentro de search-bar */
