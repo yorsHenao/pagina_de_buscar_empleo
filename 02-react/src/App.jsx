@@ -9,7 +9,7 @@ import jobsData from "./data.json";
 const RESULTS_PER_PAGE = 5;
 
 function App() {
-  const [filters, setFilters] = useState({
+  const [filters, setFilters] = useState({ // useState es un hook que nos permite visar el estado de un componente
     
       search: "",
       technology: "",
@@ -21,15 +21,24 @@ function App() {
 
   const jobsFilterByFilter = jobsData.filter(job => {
     return (
-      (filters.technology === "" || job.data.technology === filters.technology)
+      (filters.technology === "" || job.data.technology === filters.technology &&
+        (filters.location === ""  || job.data.location === filters.location) &&
+        (filters.experienceLevel === "" || job.data.experience === filters.experienceLevel)
+      )
       
     )
   });
+  console.log("trabajo filtrado", jobsFilterByFilter)
 
   const jobsWithTextFilter = textToFilter === ""
-      ? jobsFilterByFilter
+      ? jobsFilterByFilter // si no hay texto de busqueda muestra todos
       : jobsFilterByFilter.filter((job) => {
-          return job.titulo.toLowerCase().includes(textToFilter.toLowerCase()); //busqueda de texto en minuscula
+          return (
+            job.titulo.toLowerCase().includes(textToFilter.toLowerCase()) ||
+            job.empresa.toLowerCase().includes(textToFilter.toLowerCase()) ||
+            job.ubicacion.toLowerCase().includes(textToFilter.toLowerCase())
+
+          ) //busqueda de texto en minuscula
         });
 
   const totalPages = Math.ceil(jobsWithTextFilter.length / RESULTS_PER_PAGE); //calcular el total de paginas
@@ -42,8 +51,9 @@ function App() {
     setCurrentPage(page); //actualizar la pagina actual
   };
 
-  const handleSearch = (filters) => {
-    setFilters(filters)
+  const handleSearch = (filters) => { //
+    console.log("filtro recibido", filters)
+    setFilters(filters) // actualizar los filtros de busqueda 
     setCurrentPage(1)
   };
 
