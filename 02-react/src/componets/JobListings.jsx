@@ -3,7 +3,7 @@ import { JobCard } from "./JobCard.jsx"
 function JobListings({ jobs }) {
     return (
         <section>
-          <h2>Resultados de búsqueda</h2>
+          <h2 style={{textAlign: "center"}}>Resultados de búsqueda</h2>
 
           <div className="jobs-listings">
             {/* Se insertan los empleos dinamicamente */}

@@ -8,9 +8,10 @@ function JobSearch({onTextFilter, onSearch}) {
 
 
   const handleSubmit = (event) => {
+    console.log("submit")
     event.preventDefault();
     
-    const formData = new FormData(event.target)
+    const formData = new FormData(event.currentTarget)
 
     const filters = {
       technology: formData.get(ideTtechology),
@@ -32,7 +33,7 @@ function JobSearch({onTextFilter, onSearch}) {
       <h1>Encuentra tu próximo trabajo </h1>
       <p>Explora miles de oportunidades en el sector tecnológico</p>
 
-      <form onSubmit={handleSubmit} id="empleos-search-form" role="search">
+      <form onChange={handleSubmit} id="empleos-search-form" role="search">
         <div className="search-bar">
           {/* logo */}
           <svg
@@ -60,7 +61,7 @@ function JobSearch({onTextFilter, onSearch}) {
             onChange={handleTextChange}
           />
 
-          <button type="submit" style={{position: "absolute", right: "2px"}}>Buscar</button>
+          
         </div>
 
         <div className="search-filters">
