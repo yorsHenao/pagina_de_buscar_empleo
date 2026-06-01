@@ -4,8 +4,8 @@ function Header() {
             <h1>DevJobs</h1>
 
             <nav>
-                <a href="./index.html">Inicio</a>
-                <a href="./empleos.html">Empleos</a>
+                <a href="/">Inicio</a>
+                <a href="/search">Empleos</a>
                 <a href="">Empresas</a>
                 <a href="">Salarios</a>
             </nav>
