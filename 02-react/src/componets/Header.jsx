@@ -1,13 +1,16 @@
-function Header() {
+import { Link } from "./link.jsx"
+
+export function Header() {
     return (
         <header>
+    
             <h1>DevJobs</h1>
 
             <nav>
-                <a href="/">Inicio</a>
-                <a href="/search">Empleos</a>
-                <a href="">Empresas</a>
-                <a href="">Salarios</a>
+                <Link href="/">Inicio</Link>
+                <Link href="/search">Empleos</Link>
+                <Link href="">Empresas</Link>
+                <Link href="">Salarios</Link>   
             </nav>
 
             <div>
@@ -17,9 +20,10 @@ function Header() {
                 size="34"
                 />
 
-            <a href="">Subir CV</a>
+            <Link href="">Subir CV</Link>
             </div>
         </header>
+        
     )
 }
 

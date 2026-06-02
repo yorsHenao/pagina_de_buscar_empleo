@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useEffect, useState } from "react";
 import JobSearch from "../componets/JobSearch.jsx";
 import JobListings from "../componets/JobListings.jsx";
 import Pagination from "../componets/Pagination.jsx";
@@ -27,7 +27,7 @@ export function SearchPages() {
           job.data.experience === filters.experienceLevel))
     );
   });
-  console.log("trabajo filtrado", jobsFilterByFilter);
+  
 
   const jobsWithTextFilter =
     textToFilter === ""
@@ -52,7 +52,7 @@ export function SearchPages() {
 
   const handleSearch = (filters) => {
     //
-    console.log("filtro recibido", filters);
+    
     setFilters(filters); // actualizar los filtros de busqueda
     setCurrentPage(1);
   };
@@ -60,7 +60,27 @@ export function SearchPages() {
   const handleTextFilter = (newTextFilter) => {
     setTextToFilter(newTextFilter);
     setCurrentPage(1);
-  };
+  }
+
+  useEffect(() => { //nos permite ejecutar una funcion cada vez que el valor de currentPage cambie
+    document.title = `Page ${currentPage}`
+  }, [currentPage, textToFilter])
+
+  useEffect(() => {
+    // Suscripción a un evento
+    const handleResize = () => {
+      console.log("ventana redimensionada", window.innerWidth);
+    }
+    window.addEventListener("resize", handleResize);
+
+    // Limpieza de la suscripción
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    }
+  },[])
+
+
+
 
   return (
     <main>

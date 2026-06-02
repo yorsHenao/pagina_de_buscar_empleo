@@ -1,4 +1,24 @@
+import {useRouter} from "../hooks/useRouter.jsx";
+
 export function HomePage() {
+    const { navigateTo } = useRouter()
+
+
+    const handleSearch = (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const searchTerm = formData.get("search");
+        
+
+        const url= searchTerm
+        ? `/search?search=${encodeURIComponent(searchTerm)}`
+        : "/search";
+
+        navigateTo(url);
+
+        
+    }
+
   return (
     <main>
       <section>
@@ -11,7 +31,7 @@ export function HomePage() {
           proxima oportunidad
         </p>
 
-        <form role="search">
+        <form role="search" onSubmit={handleSearch}>
           <div>
             <span>
               <svg
@@ -21,10 +41,10 @@ export function HomePage() {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="1"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="icon icon-tabler icons-tabler-outline icon-tabler-search"
+                strokeWidth="1"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="icon icon-tabler icons-tabler-outline icon-tabler-search"
               >
                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                 <path d="M3 10a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
@@ -32,12 +52,13 @@ export function HomePage() {
               </svg>
             </span>
             <input
-              required
-              type="text"
-              placeholder="Buscar empleos por titulo habilidad o empresa"
+            name="search"
+            required
+            type="text"
+            placeholder="Buscar empleos por titulo habilidad o empresa"
             />
 
-            <button disabled type="submit">
+            <button  type="submit">
               Buscar
             </button>
           </div>
@@ -63,10 +84,10 @@ export function HomePage() {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="1"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="icon icon-tabler icons-tabler-outline icon-tabler-briefcase"
+              strokeWidth="1"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="icon icon-tabler icons-tabler-outline icon-tabler-briefcase"
             >
               <path stroke="none" d="M0 0h24v24H0z" fill="none" />
               <path d="M3 7m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" />
@@ -88,10 +109,10 @@ export function HomePage() {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="1"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="icon icon-tabler icons-tabler-outline icon-tabler-users"
+              strokeWidth="1"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="icon icon-tabler icons-tabler-outline icon-tabler-users"
             >
               <path stroke="none" d="M0 0h24v24H0z" fill="none" />
               <path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
@@ -115,10 +136,10 @@ export function HomePage() {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="1"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="icon icon-tabler icons-tabler-outline icon-tabler-buildings"
+              strokeWidth="1"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="icon icon-tabler icons-tabler-outline icon-tabler-buildings"
             >
               <path stroke="none" d="M0 0h24v24H0z" fill="none" />
               <path d="M4 21v-15c0 -1 1 -2 2 -2h5c1 0 2 1 2 2v15" />
