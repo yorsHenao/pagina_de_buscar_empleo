@@ -1,14 +1,8 @@
-import {useId} from "react"
-function JobSearch({onTextFilter, onSearch}) {
-  const  idText = useId()
-  const  ideTtechology = useId()
-  const  idLocation = useId()
-  const  idExperienceLevel = useId()
-
-
+import {useState, useId} from "react"
+const useSearchForm = ({ideTtechology, idLocation, idExperienceLevel, onSearch, onTextFilter}) => {
+  const [setSearchText] = useState("")
 
   const handleSubmit = (event) => {
-    console.log("submit")
     event.preventDefault();
     
     const formData = new FormData(event.currentTarget)
@@ -25,8 +19,32 @@ function JobSearch({onTextFilter, onSearch}) {
 
   const handleTextChange = (event) => {
     const text = event.target.value
+    setSearchText(text)
     onTextFilter(text)
   }
+
+  return {
+    handleSubmit,
+    handleTextChange
+  }
+
+}
+
+
+
+export function JobSearch({onTextFilter, onSearch}) {
+  const  idText = useId()
+  const  ideTtechology = useId()
+  const  idLocation = useId()
+  const  idExperienceLevel = useId()
+
+  const {
+    handleSubmit, 
+    handleTextChange
+  } = useSearchForm({ideTtechology, idLocation, idExperienceLevel, onSearch, onTextFilter})
+
+
+
 
   return (
     <section className="jobs-search">
