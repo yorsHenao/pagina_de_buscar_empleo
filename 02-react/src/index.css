@@ -498,3 +498,9 @@ Se usan con js
   display: none;
 }
  */
+
+/* Estilos para el link activo en la navegación */
+ .active {
+  font-weight: bold;
+  text-decoration: underline;
+ }
