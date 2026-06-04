@@ -363,21 +363,34 @@ article h3 {
 /* =============================================== */
 
 .jobs-listings {
+  width: min(100%, 1120px);
+  margin: 0 auto;
   border: 1px solid rgba(255, 255, 255, .3);
   border-radius: 1rem;
+  overflow: hidden;
 }
 
 .job-listing-card {
   background: none;
   box-shadow: none;
   border-radius: 0;
-  border-bottom: 1px solid rgba(255, 255, 255, .3);
+  border-bottom: 1px solid rgba(255, 255, 255, .1);
   margin: 0;
   display: flex;
-  align-items: start;
+  justify-content: space-between;
+  align-items: flex-start;
   gap: 1rem;
+  padding: 1.25rem;
+  flex-wrap: wrap;
+}
 
-  
+.job-listing-card > div {
+  flex: 1;
+  min-width: 0;
+}
+
+.job-listing-card button {
+  align-self: flex-start;
 }
 
 .job-listing-card.is-hidden {
