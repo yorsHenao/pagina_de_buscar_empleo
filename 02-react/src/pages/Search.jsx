@@ -21,17 +21,22 @@ const useUserFilters = () => {
   const [total, setTotal] = useState(0)
   const [loading, setLoading] = useState(true)
 
+
   useEffect(() => {
     async function fetchJobs() {
       try {
         setLoading(true);
-
         //parametros de filtro
         const params = new URLSearchParams()
         if (textToFilter) params.append("text", textToFilter)
         if (filters.technology) params.append("technology", filters.technology)
         if (filters.location) params.append("type", filters.location)
         if (filters.experienceLevel) params.append("level", filters.experienceLevel)
+
+          // paginacion
+          const offset = (currentPage - 1) * RESULTS_PER_PAGE
+          params.append("limit", RESULTS_PER_PAGE)
+          params.append("offset", offset)
 
           const queryParams = params.toString()
 
@@ -48,10 +53,10 @@ const useUserFilters = () => {
     }
 
     fetchJobs()
-  }, [filters, textToFilter]); //solo cuando cambien los filtros o el texto a filtrar, se ejecutara la funcion fetchJobs
+  }, [filters, textToFilter, currentPage]); //solo cuando cambien los filtros o el texto a filtrar, se ejecutara la funcion fetchJobs
 
 
-  const totalPages = Math.ceil(jobs.length / RESULTS_PER_PAGE); // calcular el total de paginas
+  const totalPages = Math.ceil(total / RESULTS_PER_PAGE); // calcular el total de paginas
 
   
 
